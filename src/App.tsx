@@ -16,9 +16,7 @@ const client = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={client}>
-      <SafeAreaView style={{backgroundColor: 'transparent', flex: 1}}>
-        <HomeScreen />
-      </SafeAreaView>
+      <HomeScreen />
     </QueryClientProvider>
   );
 };

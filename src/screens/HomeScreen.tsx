@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, Text, Image, SafeAreaView} from 'react-native';
 import Map from '../Map';
 import {useQueryClient} from 'react-query';
+import BottomSheet from '@gorhom/bottom-sheet';
+
 
 function getChunkId(lng: number, lat: number) {
   let chunkLng = Math.floor(lng);
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
     right: 0,
     position: 'absolute',
     top: 0,
-    padding: 10,
+    margin: 10,
   },
   map: {
     display: 'flex',
@@ -94,12 +96,12 @@ const HomeScreen = () => {
           }}
         />
       </View>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.topNav}>
           <Branding />
           <Avatar />
         </View>
-      </View>
+      </SafeAreaView>
     </View>
   );
 };

@@ -1,14 +1,8 @@
 import mapboxgl from '!mapbox-gl';
 import React, {useRef, useState, useEffect, FC} from 'react';
+import {IProps} from './Map.types';
 
 mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
-
-interface IProps {
-  initialLng: number;
-  initialLat: number;
-  initialZoom: number;
-  onLocationChange: (lng: number, lat: number, zoom: number) => void;
-}
 
 const Map: FC<IProps> = props => {
   const {initialLng, initialLat, initialZoom, onLocationChange} = props;
