@@ -1,3 +1,4 @@
+console.log('helloWorld');
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
   plugins: [
@@ -7,5 +8,6 @@ module.exports = {
         include: ['MAPBOX_TOKEN'],
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 };

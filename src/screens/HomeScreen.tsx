@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useMemo, useRef, useCallback} from 'react';
 import {View, StyleSheet, Text, Image, SafeAreaView} from 'react-native';
 import Map from '../Map';
 import {useQueryClient} from 'react-query';
 import BottomSheet from '@gorhom/bottom-sheet';
-
+import PugLogo from '../images/PugLogo.png';
 
 function getChunkId(lng: number, lat: number) {
   let chunkLng = Math.floor(lng);
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 60,
     backgroundColor: 'white',
-    borderRadius: 8,
+    borderRadius: 16,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   texts: {
     justifyContent: 'center',
@@ -51,19 +52,35 @@ const styles = StyleSheet.create({
   },
   nameText: {
     fontFamily: 'Kalam',
+    fontWeight: 'bold',
     fontSize: 18,
-    lineHeight: 18,
     textAlign: 'right',
   },
   detailsText: {
     fontFamily: 'Kalam',
     fontSize: 14,
-    lineHeight: 14,
     textAlign: 'right',
+  },
+  branding: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  brandingText: {
+    fontWeight: 'bold',
+    fontFamily: 'Kalam',
+    fontSize: 18,
+    marginLeft: 8,
   },
 });
 
 const HomeScreen = () => {
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
+  const sheetRef = useRef<BottomSheet>(null);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
+
   const client = useQueryClient();
   return (
     <View style={styles.screen}>
@@ -102,6 +119,14 @@ const HomeScreen = () => {
           <Avatar />
         </View>
       </SafeAreaView>
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}>
+        <View>
+          <Text>Awesome gecc 🔥</Text>
+        </View>
+      </BottomSheet>
     </View>
   );
 };
@@ -125,8 +150,9 @@ const Avatar = () => {
 
 const Branding = () => {
   return (
-    <View>
-      <Text>Pugster</Text>
+    <View style={styles.branding}>
+      <Image source={PugLogo} />
+      <Text style={styles.brandingText}>Pugster</Text>
     </View>
   );
 };
